@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "B站账号切换",
+  "version": "1.0.0",
+  "description": "在 B 站快速保存与切换多账号：只替换 5 个登录 Cookie，音量 / 连播 / 弹幕等本地设置全部保留。",
+  "minimum_chrome_version": "102",
+  "permissions": [
+    "cookies",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*.bilibili.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_title": "B站账号切换",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.bilibili.com/*",
+        "https://space.bilibili.com/*",
+        "https://t.bilibili.com/*"
+      ],
+      "js": [
+        "src/content/content.js"
+      ],
+      "css": [
+        "src/content/content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

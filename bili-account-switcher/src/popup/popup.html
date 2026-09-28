@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>B站账号切换</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="pop-header">
+        <div class="pop-title">B站账号切换</div>
+        <div class="pop-sub">仅替换登录凭证 · 保留本地设置</div>
+    </div>
+
+    <div class="pop-body" id="list">
+        <div class="pop-empty">暂无已保存的账号</div>
+    </div>
+
+    <div class="pop-status" id="status" hidden></div>
+
+    <div class="pop-footer">
+        <div class="pop-btn primary" id="btn-save">保存当前账号</div>
+        <div class="pop-btn secondary" id="btn-panel">页面面板</div>
+    </div>
+
+    <div class="pop-extra">
+        <label class="pop-check">
+            <input type="checkbox" id="chk-sync" checked>
+            <span>页面加载时自动同步凭据</span>
+        </label>
+        <div class="pop-links">
+            <span id="btn-export">导出</span>
+            <span id="btn-import">导入</span>
+            <input type="file" id="file-import" accept=".json,application/json" hidden>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+/* ============================================================================
+ * B站账号切换 — 扩展弹窗样式
+ * 设计语言与页面内弹窗保持一致：B 站主色 #00a1d6、12px 圆角、柔和投影。
+ * ========================================================================== */
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 340px;
+    background: #fff;
+    color: #18191c;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    user-select: none;
+}
+
+/* ===== 头部 ===== */
+.pop-header {
+    padding: 16px 20px 10px;
+    border-bottom: 1px solid #f1f2f3;
+}
+.pop-title { font-size: 15px; font-weight: 600; }
+.pop-sub { margin-top: 4px; font-size: 11px; color: #9499a0; }
+
+/* ===== 账号列表 ===== */
+.pop-body {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 8px 12px;
+    scrollbar-width: thin;
+}
+.pop-body::-webkit-scrollbar { width: 4px; }
+.pop-body::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+
+.pop-empty { text-align: center; color: #9499a0; font-size: 13px; padding: 32px 0; }
+
+.pop-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background .15s ease, transform .15s ease;
+}
+.pop-row:not(.current):hover { background: #f4f5f7; transform: translateX(2px); }
+.pop-row.current { cursor: default; }
+
+.pop-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #e3e5e7;
+    border: 2.5px solid transparent;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+.pop-row.current .pop-avatar {
+    border-color: #00a1d6;
+    box-shadow: 0 0 0 2px rgba(0, 161, 214, .22);
+}
+.pop-meta { flex: 1; min-width: 0; }
+.pop-name {
+    font-size: 13.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pop-row.current .pop-name { color: #00a1d6; font-weight: 600; }
+.pop-time { margin-top: 3px; font-size: 11px; color: #9499a0; }
+
+.pop-tag {
+    font-size: 11px;
+    color: #00a1d6;
+    background: rgba(0, 161, 214, .1);
+    padding: 2px 8px;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+.pop-del {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 15px;
+    color: #9499a0;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .15s ease, background .15s ease, color .15s ease;
+}
+.pop-row:hover .pop-del { opacity: 1; }
+.pop-del:hover { background: #ffecec; color: #f25d8e; }
+.pop-del.confirm {
+    opacity: 1;
+    width: auto;
+    padding: 0 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    background: #f25d8e;
+    color: #fff;
+}
+
+/* ===== 状态提示 ===== */
+.pop-status {
+    margin: 0 16px 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    background: #e8f4ff;
+    color: #0084b4;
+    word-break: break-all;
+}
+.pop-status.error { background: #ffecec; color: #d44a6e; }
+
+/* ===== 底部按钮 ===== */
+.pop-footer {
+    display: flex;
+    gap: 10px;
+    padding: 10px 16px 12px;
+    border-top: 1px solid #f1f2f3;
+}
+.pop-btn {
+    flex: 1;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, box-shadow .25s ease, transform .2s ease;
+}
+.pop-btn.primary { background: #00a1d6; color: #fff; }
+.pop-btn.primary:hover {
+    background: #00b5e5;
+    box-shadow: 0 0 8px rgba(0, 161, 214, .45), 0 0 18px rgba(0, 161, 214, .2);
+    transform: scale(1.03);
+}
+.pop-btn.secondary { background: #f4f5f7; color: #61666d; }
+.pop-btn.secondary:hover {
+    background: #e8f4ff;
+    color: #00a1d6;
+    box-shadow: 0 0 6px rgba(0, 161, 214, .3), 0 0 14px rgba(0, 161, 214, .12);
+    transform: scale(1.03);
+}
+.pop-btn:active { transform: scale(.98); }
+
+/* ===== 设置行 ===== */
+.pop-extra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 16px 14px;
+}
+.pop-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: #61666d;
+    cursor: pointer;
+}
+.pop-check input { accent-color: #00a1d6; cursor: pointer; }
+.pop-links { display: flex; gap: 12px; }
+.pop-links span {
+    font-size: 11.5px;
+    color: #0084b4;
+    cursor: pointer;
+    transition: color .15s ease;
+}
+.pop-links span:hover { color: #00a1d6; text-decoration: underline; }
+
+/* 忙碌态 */
+.pop-btn.disabled, .pop-links span.disabled { opacity: .5; pointer-events: none; }
